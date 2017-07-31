@@ -105,7 +105,7 @@ mappedNames<-mappedNames[mappedNames[,1]!="",]
 if(!is.na(appendTo))
 {
   tmpCSVFile<-read.csv(appendTo,stringsAsFactors = F)
-  sortedGalaxyNames<-mappedNames[match(mappedNames[,"realNames"],tmpCSVFile[,appendToName]),"galaxyNames"]
+  sortedGalaxyNames<-mappedNames[match(tmpCSVFile[,appendToName],mappedNames[,"realNames"]),"galaxyNames"]
   sortedGalaxyNamesID<-paste("step_",ncol(tmpCSVFile)+1,sep = "")
   outCSVFile<-cbind(tmpCSVFile,tmp=sortedGalaxyNames)
   colnames(outCSVFile)<-c(colnames(tmpCSVFile),sortedGalaxyNamesID)
