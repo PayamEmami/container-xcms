@@ -13,6 +13,7 @@ peakwidthLow=4
 peakwidthHigh=30
 noise=1000
 polarity<-"pos"
+sampleClass<-NA
 for(arg in args)
 {
   argCase<-strsplit(x = arg,split = "=")[[1]][1]
@@ -41,6 +42,10 @@ for(arg in args)
   {
     polarity=as.character(value)
   }
+  if(argCase=="sampleClass")
+  {
+    sampleClass=as.character(value)
+  }
   if(argCase=="output")
   {
     output=as.character(value)
@@ -49,11 +54,21 @@ for(arg in args)
 }
 if(is.na(RawFiles) | is.na(output)) stop("Both input and output need to be specified!\n")
 require(xcms)
+massTracesXCMSSet<-NA
+if(is.na(sampleClass))
+{
 massTracesXCMSSet<-xcmsSet(RawFiles,polarity = polarity,
         method = "centWave",
         ppm=ppm,
         peakwidth=c(peakwidthLow,peakwidthHigh),
         noise=noise)
+}else{
+massTracesXCMSSet<-xcmsSet(RawFiles,polarity = polarity,
+        method = "centWave",
+        ppm=ppm,
+        peakwidth=c(peakwidthLow,peakwidthHigh),
+        noise=noise,sclass = sampleClass)
+}
 # get original name of mz file
 name.parts <- unlist(strsplit(gsub(".*name=\"", "", grep('<sourceFile ', readLines(RawFiles), value=T)[1]), c("\\.")))
 attributes(attributes(massTracesXCMSSet)[[".processHistory"]][[1]])$origin <- paste(name.parts[-length(name.parts)], collapse=".")

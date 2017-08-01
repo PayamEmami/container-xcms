@@ -45,7 +45,7 @@ for(arg in args)
   }
 }
 
-if(is.na(inputPeakML) | is.na(output) | any(is.na(blank))) stop("All input, output and blank need to be specified!\n")
+if(is.na(previousEnv) | is.na(output) | any(is.na(blank))) stop("All input, output and blank need to be specified!\n")
 
 load(file = previousEnv)
 inputXCMS<-get(varNameForNextStep)
