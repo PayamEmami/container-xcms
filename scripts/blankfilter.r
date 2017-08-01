@@ -21,7 +21,7 @@ for(arg in args)
   value<-strsplit(x = arg,split = "=")[[1]][2]
   if(argCase=="input")
   {
-    inputPeakML=as.character(value)
+    previousEnv=as.character(value)
   }
   if(argCase=="blank")
   {
