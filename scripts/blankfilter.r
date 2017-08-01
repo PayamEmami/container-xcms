@@ -5,9 +5,8 @@ options(stringAsfactors = FALSE, useFancyQuotes = FALSE)
 # Taking the command line arguments
 args <- commandArgs(trailingOnly = TRUE)
 
-if(length(args)==0)stop("No file has been specified! Please select a file for dilution filtering!\n")
-require(mzmatch.R)
-mzmatch.init(memorysize=16000,version.1=FALSE)
+if(length(args)==0)stop("No file has been specified! Please select a file for blank filtering!\n")
+
 require(xcms)
 inputPeakML<-NA
 output<-NA
@@ -46,7 +45,7 @@ for(arg in args)
   }
 }
 
-if(is.na(inputPeakML) | is.na(output) | any(is.na(dilutionTrend))) stop("All input, output and dilution need to be specified!\n")
+if(is.na(inputPeakML) | is.na(output) | any(is.na(blank))) stop("All input, output and blank need to be specified!\n")
 
 load(file = previousEnv)
 inputXCMS<-get(varNameForNextStep)

@@ -6,8 +6,6 @@ options(stringAsfactors = FALSE, useFancyQuotes = FALSE)
 args <- commandArgs(trailingOnly = TRUE)
 
 if(length(args)==0)stop("No file has been specified! Please select a file for dilution filtering!\n")
-require(mzmatch.R)
-mzmatch.init(memorysize=16000,version.1=FALSE)
 require(xcms)
 inputPeakML<-NA
 output<-NA
